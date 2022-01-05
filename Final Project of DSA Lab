@@ -1,0 +1,52 @@
+#include <iostream>
+using namespace std;
+
+string one[] = { "", "One ", "Two ", "Three ", "Four ",
+                 "Five ", "Six ", "Seven ", "Eight ",
+                 "Nine ", "Ten ", "Eleven ", "Ewelve ",
+                 "Thirteen ", "Fourteen ", "Fifteen ",
+                 "Sixteen ", "Seventeen ", "Eighteen ",
+                 "Nineteen " };
+ 
+string ten[] = { "", "", "Twenty ", "Thirty ", "Forty ",
+                 "Fifty ", "Sixty ", "Seventy ", "Eighty ",
+                 "Ninety " };
+ 
+string Numberinword(int n, string s)
+{
+    string str = "";
+    if (n > 19)
+        str += ten[n / 10] + one[n % 10];
+    else
+        str += one[n];
+    if (n)
+        str += s;
+ 
+    return str;
+}
+
+string NumbeinEnglishword(long n)
+{
+    string out;
+    out += Numberinword((n / 1000000000), "Billion and ");
+    out += Numberinword(((n / 10000000) % 100), "Crore and ");
+    out += Numberinword(((n / 100000) % 100), "Lakh and ");
+    out += Numberinword(((n / 1000) % 100), "Thousand and ");
+    out += Numberinword(((n / 100) % 10), "Hundred ");
+ 
+    if (n > 100 && n % 100)
+        out += "and ";
+    out += Numberinword((n % 100), "");
+ 
+    return out;
+}
+
+int main()
+{
+    long n;
+    cout<<"Enter the number that you want to convert in English words : ";
+    cin>>n;
+    cout<< NumbeinEnglishword(n) << endl;
+ 
+    return 0;
+}
